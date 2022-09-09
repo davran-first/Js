@@ -9,4 +9,5 @@
 // }
 
 let numbers =  [1, 2, 3];
-numbers.reduceRight((_, item) => console.log(item), null);
+numbers.reverse();          // reverce для обратно
+console.log(numbers);

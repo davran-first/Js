@@ -8,5 +8,5 @@ let letters = [
 ]
 
 let numbers = [1, 2, 3]
-letters.push.apply(letters, numbers);  // apply для объединение массива
-console.log(letters)
+let s = letters.concat(numbers);  // apply для объединение массива
+console.log(s)

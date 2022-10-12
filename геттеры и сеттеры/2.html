@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const person = Object.create({}, {
+            login: {
+                value: 'John',
+                enumerable: true,
+                writable: true
+            },
+            password: {
+                value: 12513,
+                writable: true
+            },
+            changeLogin: {
+                get() {
+                    return this.login;
+                },
+                set(value) {
+                    if (value.length < 7) {
+                        console.log('Имя слишком короткое!')
+                        return;
+                    }
+                    this.login = value;
+                }
+            },
+            changePassword: {
+                get() {
+                    return this.password;
+                },
+                set(value) {
+                    if (((typeof value == 'number') || (typeof value == 'string')).length < 10) {
+                        console.log('Введите другой пасспорт!')
+                        return;
+                    }
+                    this.password = value;
+                }
+            }
+        })
+
+        for( let key in person){
+            if(person[key].length < 7) {
+                console.log('Имя слишком короткое!')
+            }
+        }
+    </script>
+</body>
+
+</html>

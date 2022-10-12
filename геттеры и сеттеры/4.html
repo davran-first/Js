@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        const person = Object.create({}, {
+           
+            name: {
+                value: 'Dawran',
+                enumerable: true
+            },
+            surname: {
+                value: 'Sabirbayev',
+                enumerable: true
+            },
+            date: {
+                value: new Date().toLocaleString(),
+                enumerable: true
+            },
+            comment: {
+                value: 'Hello',
+                enumerable: true,
+                writable: true,
+                configurable: true
+            },
+            changeDate: {
+                get() {
+                    return this.date
+                },
+                set(value) {
+                    this.date=value
+                    document.body.style.color='green' 
+                    document.body.style.fontSize='60px'
+                }
+            },
+            changeComment: {
+                get() {
+                    return this.comment
+                },
+                set(value) {
+                    this.comment=value
+                }
+            }
+
+        })
+    </script>
+    <h1>hello</h1>
+</body>
+</html>

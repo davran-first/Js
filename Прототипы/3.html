@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function User(name, surname, code, country, today) {
+            this.name = name;
+            this.surname = surname;
+            this.code = code;
+            this.country = country;
+            let date = new Date();
+            this.today = date.toLocaleDateString();
+        }
+
+        User.prototype.fullName = function () {
+            return `${this.name.toUpperCase()} ${this.surname.toUpperCase()}`
+        }
+        User.prototype.loginPassword = function () {
+            return `Login: ${this.login} Password: ${this.password}`
+        }
+
+        let info = new User('Bill', 'Gates', 95, 'USA');
+
+        const person = Object.create(info, {
+            name: {
+                value: 'Igor',
+                enumerable: true,
+                writable: true
+            },
+            surname: {
+                value: 'Popov',
+                enumerable: true,
+                writable: true
+            },
+            login: {
+                value: 'John',
+                enumerable: true,
+                writable: true
+            },
+            password: {
+                value: 12513,
+                enumerable: true,
+                writable: true
+            },
+            changeName: {
+                get() {
+                    return this.name;
+                },
+                set(value) {
+                    this.name = value;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

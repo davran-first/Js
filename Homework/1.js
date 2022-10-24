@@ -60,7 +60,7 @@ electroCar.navigation()
 console.log(ElectroCar.type)
 electroCar.priceChange=25000
 console.log(electroCar.priceChange)
-
+console.log(electroCar.price.toLocaleString('en-US', { style: 'currency', currency: 'USD'}))
 
 class Van extends Car {
     constructor(model, color, price, fuel, engine, number, ...location){

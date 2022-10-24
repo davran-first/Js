@@ -89,8 +89,7 @@ class Circle extends Figure{
         super(width, heihgt);
     }
     getRadius() {
-        let p = 3.14;
-        let countRadius = Math.sqrt(this.width / p).toFixed(2);
+        let countRadius = Math.sqrt(this.width / Math.PI).toFixed(2);
         return `${countRadius}`
     }
 }

@@ -1,14 +1,44 @@
+// 3)  Реализовать аналог Promise.all.
 
 
-// Task 3
-//  выполняете функцию f3.Функция должна удалить из набора s3 строку, которую пользователь вводит в i - 3. Функция должна выводить в консоль s3 после каждого удаления элемента.
+// const arr1 = new Promise(resolve => setTimeout(() => resolve('first'), 5000))
+// const arr2 = new Promise(resolve => setTimeout(() => resolve('second'), 4000))
+// const arr3 = new Promise(resolve => setTimeout(() => resolve('third'), 3000))
 
 
-function f3(i){
-    let arr = [1, 1, 2, 2, 3, 3 ,3 , 4, 4, 10, 10]
-    const s2 = new Set(arr)
-    s2.delete(i)
-    console.log(s2)
-}
+const promise1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        let text = 'text1'
+        if(typeof text !== 'string') reject(text)
+        else resolve(text)
+    }, 5000)
+})
+.catch(err => console.error('You should write text!', err))
 
-f3(3)
+
+const promise2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        let text = 'text2'
+        if(typeof text !== 'string') reject(text)
+        else resolve(text)
+    }, 4000)
+})
+.catch(err => console.error('You should write text!', err))
+
+const promise3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        let text = 'text3'
+        if(typeof text !== 'string') reject(text)
+        else resolve(text)
+    }, 4000)
+})
+.catch(err => console.error('You should write text!', err))
+
+
+
+Promise.all([promise1, promise2, promise3])
+    .then(([reply1, reply2, reply3]) => {
+        console.log(reply1)
+        console.log(reply2)
+        console.log(reply3)
+    })

@@ -1,11 +1,22 @@
-// Task 4
-//  выполняете функцию f4.Функция должна проверить наличие в наборе s4 строки введенной пользователем в i - 4. Если строка есть - то вывести в out - 4 true.Если нет - false.
 
-
-function f4(i){
-    let arr = [1, 2, 3, 4, 5, 5]
-    const s4 = new Set(arr)
-    console.log(s4.has(i))
+// 4) Есть недописаная функция "parallel(funcArray, doneAll)":
+function parallel(funcArray, doneAll) {
+  
 }
-f4(4)
-f4(10)
+
+var a = function(done) {
+  setTimeout(function() {
+    done('result a');
+  }, 300);
+};
+
+var b = function(done) {
+  setTimeout(function() {
+    done('result b');
+  }, 200);
+};
+
+parallel([a,b], function(results) {
+  console.log(results); // ['result a', 'result b']
+});
+//  Нужно её дописать. Что-то вроде аналога promise.all. И не забудьте, что результирующий массив должен сохранять тот порядок, в котором передавались функции.

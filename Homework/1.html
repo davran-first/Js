@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 200px;
+        }
+        .text {
+            font-weight: 600;
+            font-size: 20px;
+        }
+    </style>
+
+    <div class="container">
+        <div class="text"> Change HTML Content</div>
+        <button class="btn">Click Me!</button>
+    </div>
+
+    <script>
+
+        const btn = document.querySelector('.btn');
+        btn.addEventListener('click', () => {
+            document.querySelector('.text').textContent = "Hello Javascript!"
+            // document.getElementsByClassName('text')[0].innerHTML = 'Hello Javascript'
+        })
+
+     
+    </script>
+</body>
+
+</html>

@@ -50,12 +50,12 @@
         <div class="context">
             <h1>Цена</h1>
             <div class="main">
-                <div><span>Min</span><span class="span">0</span></div>
-                <div><span>Max</span><span class="span">0</span></div>
+                <div><span>Min</span><span class="span1">2500</span></div>
+                <div><span>Max</span><span class="span2">5500</span></div>
             </div>
             <div class="buttons">
-                <input type="range" id="myRange" min="0" max="5000">
-                <input type="range" id="myRange" min="5000" max="1000">
+                <input type="range" class="rangefirst" min="0" max="5000">
+                <input type="range" class="rangesecond" min="5000" max="10000">
             </div>
 
         </div>
@@ -63,38 +63,25 @@
 
 
     <script>
-        const btn = document.querySelectorAll('#myRange');
-
-        btn[0].addEventListener('click', () => {
-            let x = document.querySelectorAll('#myRange')[0].value;
-            document.querySelectorAll('.span')[0].textContent = x
+        const btn1 = document.querySelector('.rangefirst');
+    
+      
+        btn1.addEventListener('click', () => {
+            let x = document.querySelector('.rangefirst').value;
+            document.querySelector('.span1').textContent = x
         })
 
 
-        btn[1].addEventListener('click', () => {
-            let y = document.querySelectorAll('#myRange')[1].value;
-            document.querySelectorAll('.span')[1].textContent = y
+        const btn2 = document.querySelector('.rangesecond');
+        
+        btn2.addEventListener('click', () => {
+            let y = document.querySelector('.rangesecond').value;
+            document.querySelector('.span2').textContent = y
         })
 
-        // const buttons = document.querySelector('.buttons');
-        // buttons.forEach(button => {
-        //     button.addEventListener('click', () => {
-        //             let x = document.querySelectorAll('#myRange')[0].value;
-        //             document.querySelectorAll('.span')[0].textContent = x
-        //     })
-        // })
+    
 
-
-
-        // buttons.addEventListener('click', (event) => {
-        //     if (event.target.closest('.myRange1')) {
-        //         let x = document.querySelector('#myRange').value;
-        //         document.querySelector('.span').textContent = x
-        //     } else if ((event.target.closest('.myRange2'))) {
-        //         let y = document.querySelector('#myRange').value;
-        //         document.querySelector('.span').textContent = y
-        //     }
-        // })
+       
     </script>
 </body>
 

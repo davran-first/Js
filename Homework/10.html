@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .boxes {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        .boxes div {
+            color: white;
+            text-align: center;
+            vertical-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box1{
+            width: 250px;
+            height: 250px;
+            background-color: black;
+            color: white;
+        }
+        .box2 {
+            width: 200px;
+            height: 200px;
+            background-color: black;
+        }
+        .box3 {
+            width: 150px;
+            height: 150px;
+            background-color: black;
+        }
+        .box4 {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+        }
+        .box5 {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+        }
+    </style>
+    <div class="boxes">
+        <div class="box1">Vasya</div>
+        <div>Vasya</div>
+        <div>Vasya</div>
+        <div>Vasya</div>
+        <div>Vasya</div>
+    </div>
+    <script>
+        let box = document.querySelector('.boxes')
+        let box1 = box.children[0]
+        let box2 = box.children[1]
+        let box3 = box.children[2]
+        let box4 = box.children[3]
+        let box5 = box.children[4]
+
+        
+        box1.addEventListener('click', () => {
+            let x = box2
+            x.classList.toggle('box2')
+        })
+        box2.addEventListener('click', () => {
+            let x = box3
+            x.classList.toggle('box3')
+        })
+        box3.addEventListener('click', () => {
+            let x = box4
+            x.classList.toggle('box4')
+        })
+        box4.addEventListener('click', () => {
+            let x = box5
+            x.classList.toggle('box5')
+        })
+
+      
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            border: 0;
+            list-style: none;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            background-color: #ccc;
+        }
+
+        .context {
+            padding-left: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            width: 400px;
+            height: 350px;
+        }
+
+        .select {
+            font-size: 16px;
+            border: 1px solid red;
+            width: 350px;
+        }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    </style>
+    <div class="container">
+        <div class="context">
+            <select name="" class="select">
+                <option>Select a Option.</option>
+                <option>Option One</option>
+                <option>Option Two</option>
+            </select>
+            <ul class="list">
+                <li>Option One</li>
+                <li>Option Two</li>
+                <li>Option One</li>
+                <li>Option Two</li>
+                <li>Option One</li>
+                <li>Option Two</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        let select = document.querySelector('.select');
+        let elem1 = select.children[0]
+        let elem2 = select.children[1]
+        let elem3 = select.children[2]
+        let list = document.querySelector('.list')
+
+        function universal() {
+            let x = list.textContent
+
+
+            let i = select.selectedIndex;
+
+            if (select.options[i] == select.options[0]) {
+                list.innerHTML = `<li>Option One</li>
+                                  <li>Option Two</li>
+                                  <li>Option One</li>
+                                  <li>Option Two</li>
+                                  <li>Option One</li>
+                                  <li>Option Two</li>`
+            } else if (select.options[i] == select.options[1]) {
+                list.innerHTML = `<li>Option One</li>
+                                  <li>Option One</li>
+                                  <li>Option One</li>`
+            } else if (select.options[i] == select.options[2]) {
+                list.innerHTML = `<li>Option Two</li>
+                                  <li>Option Two</li>
+                                  <li>Option Two</li>`
+            }
+
+        }
+        select.addEventListener('click', universal)
+
+    </script>
+</body>
+
+</html>

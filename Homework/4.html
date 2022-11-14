@@ -26,22 +26,23 @@
     </style>
     <div class="container">
         <div class="text">Hide HTML Elements</div>
-        <button class="btn">see ya</button>
-        <button class="btn">come back</button>
+        <div class="buttons">
+            <button class="btn">see ya</button>
+            <button class="btn">come back</button>
+        </div>
     </div>
 
     <script>
-
         const btns = document.querySelectorAll('.btn');
-       
+
         btns[0].addEventListener('click', () => {
-            document.querySelector('.text').remove()
-        }, {once: true})
+            let x = document.querySelector('.text').style.display = "none"
+          
+        })
 
         btns[1].addEventListener('click', () => {
-            document.querySelector('.text').textContent = 'Hide HTML Elements'
+            let x = document.querySelector('.text').style.display = "block"
         })
-      
     </script>
 </body>
 

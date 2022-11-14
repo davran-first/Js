@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            border: 0;
+            list-style: none;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            background-color: #ccc;
+        }
+
+        .context {
+            padding-left: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            width: 400px;
+            height: 350px;
+        }
+
+        .select {
+            font-size: 16px;
+            border: 1px solid #000;
+            width: 350px;
+        }
+
+        .text {
+            width: 350px;
+            text-align: center;
+            font-size: 16px;
+            color: red;
+            visibility: hidden;
+        }
+
+        .vision {
+            visibility: visible;
+        }
+    </style>
+    <div class="container">
+        <div class="context">
+            <span class="text">one</span>
+            <select name="" class="select" multiple>
+                <option>One</option>
+                <option>Two</option>
+                <option>Three</option>
+                <option>Four</option>
+            </select>
+
+        </div>
+    </div>
+    <script>
+        let select = document.querySelector('.select')
+        let text = document.querySelector('.text')
+        let elem1 = select.children[0]
+        let elem2 = select.children[1]
+        let elem3 = select.children[2]
+        let elem4 = select.children[3]
+
+
+        select.addEventListener('click', () => {
+            let selected = []
+            for (let opt of select) {
+                if (opt.selected) {
+                        selected.push(opt.value)
+                    }
+            }
+            text.textContent = selected
+        })
+
+
+
+        function universal() {
+            let x = this.textContent
+            text.textContent = x
+            text.classList.add('vision')
+        }
+
+        elem1.addEventListener('click', universal)
+        elem2.addEventListener('click', universal)
+        elem3.addEventListener('click', universal)
+        elem4.addEventListener('click', universal)
+    </script>
+</body>
+
+</html>

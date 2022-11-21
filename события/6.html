@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .includes {
+            display: flex;
+        }
+
+        .inputs {
+            display: flex;
+            flex-wrap: wrap;
+
+            /* flex-direction: column; */
+            /* border: 1px solid red; */
+            max-width: 620px;
+        }
+
+        .btn {
+            cursor: pointer;
+            padding: 2px 5px;
+        }
+
+        input[type=button] {
+            padding: 2px 5px;
+            margin: 0px 2px;
+
+        }
+
+        .header {
+            display: flex;
+            gap: 140px;
+        }
+    </style>
+    <div class="container">
+        <div class="wrapper">
+            <div class="header">
+                <div>Name</div>
+                <div>Country</div>
+                <div>Age</div>
+            </div>
+            <div class="inputs">
+                <!-- <input type="button" value="Edit">
+                <input type="button" value="Delete"> -->
+            </div>
+            <div class="includes">
+                <input type="text" class="name">
+                <input type="text" class="country">
+                <input type="text" class="age">
+                <button class="btn">Add Row</button>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        let btn = document.querySelector('.btn')
+        let inputs = document.querySelector('.inputs')
+        let name = document.querySelector('.name')
+        let country = document.querySelector('.country')
+        let age = document.querySelector('.age')
+
+
+        let includes = document.querySelector('.includes')
+
+        btn.addEventListener('click', () => {
+
+            let getName = name.value;
+            let getCountry = country.value;
+            let getAge = age.value;
+
+            let x = document.createElement('input')
+            let y = document.createElement('input')
+            let z = document.createElement('input')
+            let edit = document.createElement('input')
+            edit.classList.add('editer')
+            let del = document.createElement('input')
+            del.classList.add('deleter')
+            edit.setAttribute('type', 'button')
+            edit.setAttribute('value', 'Edit')
+            del.setAttribute('type', 'button')
+            del.setAttribute('value', 'Delete')
+
+            x.value = getName;
+            y.value = getCountry;
+            z.value = getAge;
+            x.setAttribute('disabled', '')
+            y.setAttribute('disabled', '')
+            z.setAttribute('disabled', '')
+
+
+
+
+            document.addEventListener('click', (e) => {
+                if (e.target == document.querySelector('.editer')) {
+                    x.removeAttribute('disabled')
+                    y.removeAttribute('disabled')
+                    z.removeAttribute('disabled')
+                }
+
+                if (e.target == document.querySelector('.deleter')) {
+                    x.remove()
+                    y.remove()
+                    z.remove()
+                    edit.remove()
+                    del.remove()
+                }
+            })
+
+            inputs.appendChild(x)
+            inputs.appendChild(y)
+            inputs.appendChild(z)
+            inputs.appendChild(edit)
+            inputs.appendChild(del)
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f3f3;
+        }
+
+        .container {
+            width: 80%;
+            height: 80vh;
+            margin: auto;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container .image {
+            display: none;
+        }
+
+        .container .image img {
+            /* width: 100%;
+            height: 80vh; */
+            object-fit: cover;
+            overflow: hidden;
+        }
+
+        .container .button {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 5;
+        }
+
+        .container .button a {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            vertical-align: middle;
+            align-items: center;
+            cursor: pointer;
+            color: white;
+            background: rgba(0, 0, 0, 0.8);
+            font-size: 20px;
+            user-select: none;
+        }
+
+        .container .button .prev {
+            border-radius: 0 5px 5px 0;
+        }
+
+        .container .button .next {
+            border-radius: 5px 0 0 5px;
+        }
+
+        .dots {
+            text-align: center;
+            position: absolute;
+            top: 100%;
+            left: 45%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 5px 10px;
+            height: 30px;
+            border-radius: 15px;
+
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #bbb;
+            display: inline-block;
+            margin: 0 2px;
+        }
+
+        .active,
+        .dot:hover {
+            background: yellow;
+        }
+    </style>
+    <div class="container">
+        <div class="image">
+            <img src="./img/1.jpg" alt="">
+        </div>
+        <div class="image">
+            <img src="./img/2.jpg" alt="">
+        </div>
+        <div class="image">
+            <img src="./img/3.jpg" alt="">
+        </div>
+        <div class="image">
+            <img src="./img/4.jpg" alt="">
+        </div>
+        <div class="image">
+            <img src="./img/5.jpg" alt="">
+        </div>
+
+        <div class="button">
+            <a  class="prev">&#10094;</a>
+            <a  class="next">&#10095;</a>
+        </div>
+
+        <div class="dots">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+    </div>
+
+    <script>
+        let prev = document.querySelector('.prev')
+        let next = document.querySelector('.next')
+        let dots = document.querySelector('.dots')
+        var imageno = 1;
+        displayimg(imageno);
+
+
+        prev.addEventListener('click', () => {
+            displayimg(imageno += -1)
+        })
+
+        next.addEventListener('click', () => {
+            displayimg(imageno += 1)
+        })
+
+        
+        function currentSlide(n) {
+            displayimg(imageno = n)
+        }
+
+        function displayimg(n) {
+            var i;
+            var image = document.getElementsByClassName("image");
+            var dots = document.getElementsByClassName("dot");
+
+            if (n > image.length) {
+                imageno = 1;
+            }
+
+            if (n < 1) {
+                imageno = image.length;
+            }
+
+            for (i = 0; i < image.length; i++) {
+                image[i].style.display = "none";
+            }
+
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+
+            image[imageno - 1].style.display = "block";
+            dots[imageno - 1].className += " active";
+
+        }
+    </script>
+</body>
+
+</html>

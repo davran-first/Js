@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            outline: none;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            background-color: #00ffff;
+        }
+
+        .main {
+            margin-top: 50px;
+            display: flex;
+            gap: 60px;
+        }
+
+        .traffic-light__body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            background-color: #282828;
+            border-radius: 20px;
+            border: 2px solid #000;
+            position: relative;
+        }
+
+        .traffic-light__body::after {
+            content: "";
+            width: 20px;
+            height: 200px;
+            background-color: #000;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, 0%)
+        }
+
+        .traffic-light__red,
+        .traffic-light__yellow,
+        .traffic-light__green {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #000;
+            border: 4px solid #404040;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .settings {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        button {
+            background-color: #000;
+            color: #fff;
+            padding: 5px 20px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        input {
+            border: 1px solid #000;
+            padding: 5px 2px;
+        }
+
+        .title {
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+    </style>
+
+    <div class="container">
+        <div class="main">
+            <div class="traffic-light">
+                <div class="traffic-light__body">
+                    <div class="traffic-light__red"></div>
+                    <div class="traffic-light__yellow"></div>
+                    <div class="traffic-light__green"></div>
+                </div>
+            </div>
+            <div class="settings">
+                <div class="settings__red">
+                    <div class="title">Time red</div>
+                    <input type="number" step="1" class="input-red">
+                </div>
+                <div class="settings__yellow">
+                    <div class="title">Time yellow</div>
+                    <input type="number" step="1" class="input-yellow">
+                </div>
+                <div class="settings__green">
+                    <div class="title">Time green</div>
+                    <input type="number" step="1" class="input-green">
+                </div>
+                <button class="start-btn">Start</button>
+                <button class="stop-btn">Stop</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let red = document.querySelector('.traffic-light__red')
+        let yellow = document.querySelector('.traffic-light__yellow')
+        let green = document.querySelector('.traffic-light__green')
+
+        let inputRed = document.querySelector('.input-red')
+        let inputYellow = document.querySelector('.input-yellow')
+        let inputGreen = document.querySelector('.input-green')
+        let startBtn = document.querySelector('.start-btn')
+        let stopBtn = document.querySelector('.stop-btn')
+
+        
+        startBtn.addEventListener('click', function func() {
+            let bg = red.style.backgroundColor = "red"
+            let color = red.style.color = "blue"
+            let x = inputRed.value;
+            let y = red.textContent
+            let interval = setInterval(function func() {
+                red.textContent = x--;
+                return func;
+            }(), 1000)
+
+            let second = x * 1000;
+            setTimeout(() => {
+                clearInterval(interval);
+
+                red.style.backgroundColor = null
+                red.style.color = null
+            }, second + 2000)
+        })
+
+       
+
+        startBtn.addEventListener('click', function func() {
+            let bg = yellow.style.backgroundColor = "yellow"
+            let color = yellow.style.color = "blue"
+            let x = inputYellow.value;
+            let y = yellow.textContent
+            let interval = setInterval(function func() {
+                yellow.textContent = x--;
+                return func;
+            }(), 1000)
+
+            let second = x * 1000;
+            setTimeout(() => {
+                clearInterval(interval);
+
+                yellow.style.backgroundColor = null
+                yellow.style.color = null
+            }, second + 2000)
+
+
+        })
+
+        startBtn.addEventListener('click', function func() {
+            let bg = green.style.backgroundColor = "green"
+            let color = green.style.color = "blue"
+            let x = inputGreen.value;
+            let y = green.textContent
+            let interval = setInterval(function func() {
+                green.textContent = x--;
+                return func;
+            }(), 1000)
+
+            let second = x * 1000;
+            setTimeout(() => {
+                clearInterval(interval);
+
+                green.style.backgroundColor = null
+                green.style.color = null
+            }, second + 2000)
+        })
+
+        stopBtn.addEventListener('click', () => {
+            red.style.backgroundColor = null
+            red.style.color = null
+            yellow.style.backgroundColor = null
+            yellow.style.color = null
+            green.style.backgroundColor = null
+            green.style.color = null
+        })
+    </script>
+</body>
+
+</html>

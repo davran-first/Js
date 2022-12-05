@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./icomoon/style.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Notes</title>
+</head>
+
+<body>
+    <section class="notes">
+
+        <div class="notes__inner">
+            <header class="notes__header">
+                <div class="notes-logo">
+                    <a href="#">Tasks</a>
+                </div>
+                <form class="notes-inputes">
+                    <div class="notes-inputes__dates">
+                        <input type="date" class="notes-inputes__date" id="notes-inputes__date">
+                        <span class="notes-inputes__date-message" id="notes-inputes__date-message"></span>
+                    </div>
+                    <div class="notes-inputes__textes">
+                        <input class="notes-inputes__text" id="notes-inputes__text" type="text"
+                            placeholder="Add more...">
+                        <span class="notes-inputes__message" id="notes-inputes__message"></span>
+                    </div>
+                    <div>
+                        <input class="notes-inputes__check" id="notes-inputes__check" type="checkbox">
+                    </div>
+                    <div>
+                        <!-- <input class="notes-inputes__sub" type="submit" value="Add more"> -->
+                        <button class="notes-inputes__sub" id="notes-inputes__sub">Add more</button>
+                    </div>
+
+                </form>
+                <div class="notes-user">
+                    <div>admin</div>
+                </div>
+            </header>
+            <main class="notes__main">
+                <div class="notes-categories">
+                    <button class="notes-categories__btn" data-tab="#tab_1">All Tasks</button>
+                    <button class="notes-categories__btn" data-tab="#tab_2">Category</button>
+                </div>
+                <div class="notes-content">
+                    <div class="notes-content__item" id="tab_1">
+                        <div class="notes-content__searches">
+                            <input class="notes-content__search" type="search" placeholder="Search...">
+                        </div>
+                        <ul class="notes-content__lists" id="notes-content__lists">
+
+                        </ul>
+
+                    </div>
+                    <div class="notes-content__item" id="tab_2">
+                        <div class="notes-content__wrapper">
+                            <div class="notes-content__usual">
+                                <div class="">
+                                    In process
+                                </div>
+                                <ul>
+
+                                </ul>
+                            </div>
+                            <div class="notes-content__important">
+                                <div class="">
+                                    Important
+                                </div>
+                                <ul>
+
+                                </ul>
+                            </div>
+                            <div class="notes-content__done">
+                                <div class="">
+                                    Done
+                                </div>
+                                <ul>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-todo hidden" id="modal">
+
+                        <form class="form-edit" id="form-edit">
+                            <div class="form-edit__inp">
+                                <input class="form-edit__input" id="form-edit__input" type="text"
+                                    placeholder="Edit todo...">
+                                <span class="form-edit__message" id="form-edit__message"></span>
+                            </div>
+                            <div class="form-edit__dates">
+                                <input class="form-edit__date" id="form-edit__date" type="date">
+                                <span class="form-edit__date-message" id="form-edit__date-message"></span>
+                            </div>
+                            <div class="form-edit__buttons">
+                                <button class="form-edit__exit" id="form-edit__exit">
+                                    Exit
+                                </button>
+                                <button class="form-edit__save">
+                                    Save
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+
+
+                </div>
+            </main>
+        </div>
+
+
+        <div class="overlay hidden" id="overlay"></div>
+    </section>
+
+    <script type="module" src="./js/script.js"></script>
+    <script>
+        let notesInputes = document.querySelector('.notes-inputes')
+        let notesContentLists = document.querySelector('.notes-content__lists')
+        let formEdit = document.getElementById('form-edit')
+
+
+        //////modal
+        let modal = document.getElementById('modal')
+        let overlay = document.getElementById('overlay')
+        let modalClose = document.getElementById('form-edit__exit')
+
+        let editItemId
+
+
+        // check for the keys from local storage
+        let todos = JSON.parse(localStorage.getItem('lists')) ?
+            JSON.parse(localStorage.getItem('lists')) : []
+
+        if (todos.length) showTodos()
+
+        /// Todo lists to local storage
+
+        function setTodos() {
+            localStorage.setItem('lists', JSON.stringify(todos))
+        }
+
+
+
+
+
+        // show todos data in the screen 
+        function showTodos() {
+            const todos = JSON.parse(localStorage.getItem('lists'))
+
+            notesContentLists.innerHTML = " " /// this method will clear before adding tasks
+
+            todos.forEach((item, i) => {
+                notesContentLists.innerHTML += `
+        <li onclick="setCompleted(${i})" class="notes-content__list">
+            <div class="notes-content__text">
+                <div class="${ item.completed == true ? 'donecolor' : 'usualcolor'}"></div> <div class="${ item.completed == true ? 'done' : ''}">${item.text}</div>
+            </div>
+            <div class="notes-content__data ${ item.completed == true ? 'done' : ''}">
+                ${item.time}, 00:00:00
+            </div>
+            <div class="notes-content__btns">
+                <button onclick=(deleteTodo(${i})) class="notes-content__btn-delete">Delete</button>
+                <button onclick=(editTodo(${i})) class="notes-content__btn-edit">Edit</button>
+            </div>
+        </li>
+        
+        `
+            })
+        }
+
+
+
+        // show message                                               /// this method can show message when input is empty
+        function showMessage(where, message) {
+            document.querySelector(`${where}`).textContent = message
+
+            setTimeout(() => {
+                document.querySelector(`${where}`).textContent = ''
+            }, 2500)
+        }
+
+
+
+
+
+
+        /// get Todos data
+
+        notesInputes.addEventListener('submit', (e) => {
+            e.preventDefault()
+            ////
+            const todoText = notesInputes['notes-inputes__text'].value
+                .trim() /// got id from form  and trim can remove space 
+
+            const todoDate = notesInputes['notes-inputes__date'].value
+            const date = new Date(todoDate)
+            const getDate = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+            const getMonth = date.getMonth() < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1)
+            const changeFormatDate = `${getDate}.${getMonth}.${date.getFullYear()}`
+
+            if (todoText.length > 0 && todoDate.length > 0) {
+                notesInputes.reset() //// this method in order to clear message after pushing
+            }
+
+
+            if (todoText.length && todoDate.length) {
+                todos.push({
+                    text: todoText,
+                    time: changeFormatDate,
+                    completed: false,
+                    usual: true
+                })
+                setTodos()
+                showTodos()
+            } else {
+                showMessage('.notes-inputes__message', 'Please, enter some text...')
+                showMessage('.notes-inputes__date-message', 'Please, select the date!')
+            }
+        })
+
+
+        ///// delete toDo 
+
+        function deleteTodo(id) {
+            const deletedTodos = todos.filter((item, i) => {
+                return i !== id
+            })
+
+            todos = deletedTodos
+            setTodos()
+            showTodos()
+        }
+
+        // setCompleted
+        function setCompleted(id) {
+            const completedTodos = todos.map((item, i) => {
+                if (id == i) {
+                    return {
+                        ...item,
+                        completed: item.completed == true ? false : true
+                    }
+                } else {
+                    return {
+                        ...item
+                    }
+                }
+            })
+            todos = completedTodos
+            setTodos()
+            showTodos()
+        }
+
+
+        /// edit From
+
+        formEdit.addEventListener('submit', (e) => {
+            e.preventDefault()
+
+            const todoText = formEdit['form-edit__input'].value.trim()
+
+            const todoDate = formEdit['form-edit__date'].value
+            const date = new Date(todoDate)
+            const getDate = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+            const getMonth = date.getMonth() < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1)
+            const changeFormatDate = `${getDate}.${getMonth}.${date.getFullYear()}`
+
+
+            formEdit.reset()
+
+            if (todoText.length && todoDate.length) {
+                todos.splice(editItemId, 1, {
+                    text: todoText,
+                    time: changeFormatDate,
+                    completed: false,
+                    usual: true
+                })
+                setTodos()
+                showTodos()
+                close()
+            } else {
+                showMessage('.form-edit__message', 'Please, Enter some text...')
+                showMessage('.form-edit__date-message', 'Please, select the date!')
+            }
+        })
+
+
+        // edit Todo
+
+        function editTodo(id) {
+            open()
+            editItemId = id
+        }
+
+
+        // when press exit button and empty window the modal window will close
+        overlay.addEventListener('click', close)
+        modalClose.addEventListener('click', close)
+
+
+        // When press ESC the modal window wil will close
+        document.addEventListener('keydown', (e) => {
+            if (e.which == 27) {
+                close()
+            }
+        })
+
+        function open() {
+            modal.classList.remove('hidden')
+            overlay.classList.remove('hidden')
+        }
+
+        function close() {
+            modal.classList.add('hidden')
+            overlay.classList.add('hidden')
+        }
+    </script>
+</body>
+
+</html>

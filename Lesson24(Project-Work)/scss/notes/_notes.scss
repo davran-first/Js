@@ -1,0 +1,374 @@
+.notes {
+    background-color: $color-white;
+
+    &__inner {
+        @include flex(column);
+    }
+
+    &__header {
+        padding: 0px 20px;
+        @include flex(row, space-between, center);
+        height: 13vh;
+    }
+
+    &__main {
+        display: flex;
+        height: 87vh;
+    }
+
+}
+
+
+
+.notes-logo {
+    a {
+        @include font-style(14px, $ff-RobotoBold, 700, $color-black, uppercase);
+    }
+
+}
+
+.notes-inputes {
+    @include flex($gap: 20px);
+    align-items: center;
+
+    &__dates {
+        position: relative;
+    }
+
+    &__date {
+        border: 1px solid $color-blue;
+        border-radius: 50px;
+        padding: 8px;
+    }
+
+    &__date-message {
+        @include font-style(11px, $ff-RobotoRegular, 400, $color-task-red, normal);
+        position: absolute;
+        top: 110%;
+        left: 10px;
+    }
+
+
+    &__textes {
+        // display: flex;
+        // flex-direction: column;
+        position: relative;
+    }
+
+    &__text {
+        border: 1px solid $color-blue;
+        border-radius: 50px;
+        padding: 8px 10px;
+        @include font-style(14px, $ff-RobotoRegular, 400, $color-black, normal);
+        width: 350px;
+    }
+
+    &__message {
+        @include font-style(11px, $ff-RobotoRegular, 400, $color-task-red, normal);
+        position: absolute;
+        top: 110%;
+        left: 10px;
+    }
+
+
+    input[type="checkbox"] {
+        appearance: none;
+        height: 18px;
+        width: 32px;
+        border-radius: 20px;
+        cursor: pointer;
+        position: relative;
+        outline: none;
+        background-color: $color-black;
+    }
+
+    input[type="checkbox"]::before {
+        content: '';
+        background: $color-white;
+        border: 1px solid $color-grey;
+        height: 17px;
+        width: 17px;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: scale(1.1);
+        transition: left 0.2s;
+    }
+
+
+    &__sub {
+        background-color: $color-blue;
+        border-radius: 25px;
+        @include font-style(12px, $ff-RobotoRegular, 400, $color-white, normal);
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+}
+
+.notes-user {
+    @include font-style(14px, $ff-RobotoRegular, 400, $color-black, normal);
+    cursor: pointer;
+    position: relative;
+
+    &::before {
+        content: "\f2bd";
+        font-family: 'icomoon';
+        position: absolute;
+        top: -3px;
+        left: -25px;
+        color: $color-blue;
+        font-size: 18px;
+    }
+}
+
+
+//////////////////////////////////////////////////////////////////////////////
+/// 
+/// 
+.notes-categories {
+    flex-basis: 20%;
+    @include flex(column, $a-items: center);
+
+    &__btn {
+        min-width: 100%;
+        text-align: center;
+        padding: 25px 0px;
+        @include font-style(16px, $ff-RobotoRegular, 400, $color-black, normal);
+        position: relative;
+        background-color: transparent;
+
+
+        &:first-child::before {
+            content: "\f0ae";
+            font-family: 'icomoon';
+            position: absolute;
+            top: 25px;
+            left: 80px;
+        }
+
+        &:nth-child(2)::before {
+            content: "\f036";
+            font-family: 'icomoon';
+            position: absolute;
+            top: 25px;
+            left: 80px;
+        }
+
+    }
+
+    .active {
+        background-color: $color-blue;
+        color: $color-white;
+    }
+
+}
+
+.notes-content {
+    flex-basis: 80%;
+    background-color: #F0F0F0;
+
+    &__item {
+        display: none;
+    }
+
+    .active {
+        display: block;
+    }
+
+    &__searches {
+        padding: 25px 0px;
+        @include flex(row, center, center);
+    }
+
+    &__search {
+        flex-basis: 80%;
+        border: 1px solid $color-blue;
+        border-radius: 50px;
+        padding: 10px 10px;
+        @include font-style(14px, $ff-RobotoRegular, 400, $color-black, normal);
+    }
+
+    ////// list tasks  /////////////////////////////////////////////////////////////////////////////////
+
+    &__lists {
+        padding: 20px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__list {
+        background-color: $color-white;
+        border-radius: 50px;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        @include font-style(15px, $ff-RobotoRegular, 400, $color-black, normal);
+
+    }
+
+    &__text {
+        flex-basis: 50%;
+        display: flex;
+        gap: 20px;
+    }
+
+    &__data {
+        flex-basis: 25%;
+    }
+
+    &__btns {
+        flex-basis: 25%;
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+    }
+
+    &__btn-delete {
+        background-color: $color-orange;
+        color: $color-white;
+        border-radius: 50px;
+        padding: 5px 0px;
+        width: 80px;
+    }
+
+    &__btn-edit {
+        background-color: $color-blue;
+        color: $color-white;
+        border-radius: 50px;
+        padding: 5px 0px;
+        width: 80px;
+    }
+}
+
+.done {
+    text-decoration: line-through;
+}
+
+.donecolor {
+    width: 12px;
+    height: 12px;
+    border-radius: 50px;
+    background-color: $color-task-green;
+}
+
+
+.usualcolor {
+    width: 12px;
+    height: 12px;
+    border-radius: 50px;
+    background-color: $color-task-orange;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////// modal style
+
+
+.modal-todo {
+    position: fixed;
+    max-width: 300px;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    background-color: $color-white;
+    border-radius: 5px;
+    padding: 40px;
+}
+
+.form-edit {
+    @include flex(column, center, center, 20px);
+    @include font-style(14px, $ff-RobotoRegular, 400, $color-black, normal);
+
+    &__inp {
+        position: relative;
+    }
+
+    &__message {
+        @include font-style(11px, $ff-RobotoRegular, 400, $color-task-red, normal);
+        position: absolute;
+        top: 107%;
+        left: 5px;
+    }
+
+    &__input,
+    &__date {
+        border: 1px solid #909090;
+        min-width: 200px;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    &__dates {
+        position: relative;
+    }
+
+    &__date-message {
+        @include font-style(11px, $ff-RobotoRegular, 400, $color-task-red, normal);
+        position: absolute;
+        top: 107%;
+        left: 5px;
+    }
+
+    &__buttons {
+        min-width: 200px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__exit {
+        background-color: $color-task-orange;
+        color: $color-white;
+        padding: 4px 30px;
+    }
+
+    &__save {
+        background-color: $color-blue;
+        color: $color-white;
+        padding: 4px 30px;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(34, 34, 34, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 50;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+
+.notes-content {
+
+    &__wrapper {
+        @include flex($j-content: space-between);
+        padding: 20px;
+    }
+    &__usual, &__important, &__done {
+        flex-basis: 33%;
+        text-align: center;
+        @include font-style(16px, $ff-RobotoRegular, 400, $color-black, normal);
+        position: relative;
+    }
+    &__usual::after, &__important::after {
+        content: "";
+        width: 2px;
+        min-height: 82vh;
+        background-color: #C0C0C0;
+        position: absolute;
+        top: -5px;
+        right: 0;
+    }
+}
